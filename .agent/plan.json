@@ -1,0 +1,358 @@
+{
+  "created_at": "2026-07-21T01:15:00Z",
+  "project": "coder-waifu",
+  "approver": "user",
+  "plan_version": "v1",
+  "tasks": [
+    {
+      "id": "T-001",
+      "title": "Package scaffolding, pyproject.toml, and package layout",
+      "objective": "Create the coder_waifu/ package tree, pyproject.toml with build-system, dependencies, scripts, and set up a local venv with pytest and ruff.",
+      "dependencies": [],
+      "owned_paths": [
+        "coder_waifu/__init__.py",
+        "pyproject.toml",
+        "README.md",
+        ".gitignore",
+        "LICENSE"
+      ],
+      "inputs": [],
+      "outputs": ["pip install -e . succeeds", ".venv/bin/python -m pytest -q --collect-only exits 0", ".venv/bin/ruff check . exits 0"],
+      "acceptance_criteria": [
+        "python -m coder_waifu --help runs without ImportError after install",
+        "pyproject.toml declares python>=3.10 and hermes dependency",
+        "LICENSE contains MIT text"
+      ],
+      "verification_commands": [
+        "python3 -m pip install -e .",
+        ".venv/bin/python -m pytest -q --collect-only",
+        ".venv/bin/ruff check .",
+        "head -n 20 LICENSE"
+      ],
+      "risk": "low",
+      "status": "pending",
+      "attempts": 0,
+      "open_findings": []
+    },
+    {
+      "id": "T-002",
+      "title": "Core CLI framework with subcommands",
+      "objective": "Implement coder-waifu CLI entry point using stdlib argparse or lightweight approach, with subcommands: init, run, status, resume, agents, --help. Route all user output through a persona-aware UI helper.",
+      "dependencies": ["T-001"],
+      "owned_paths": [
+        "coder_waifu/cli.py",
+        "coder_waifu/ui.py",
+        "tests/test_cli.py"
+      ],
+      "inputs": [],
+      "outputs": ["CLI with all subcommands wired"],
+      "acceptance_criteria": [
+        "coder-waifu --help lists all subcommands",
+        "coder-waifu init --help shows usage",
+        "coder-waifu run --help shows usage"
+      ],
+      "verification_commands": [
+        ".venv/bin/python -m pytest tests/test_cli.py -q",
+        ".venv/bin/python -m coder_waifu --help",
+        ".venv/bin/python -m coder_waifu init --help"
+      ],
+      "risk": "low",
+      "status": "pending",
+      "attempts": 0,
+      "open_findings": []
+    },
+    {
+      "id": "T-003",
+      "title": "Role definition YAML loader and built-in roles",
+      "objective": "Implement roles/loader.py that discovers bundled YAML role definitions, validates schema, merges user `.coder-waifu/roles/` overrides, and exposes a role registry. Include 20 built-in YAML role definitions under coder_waifu/roles/builtins/.",
+      "dependencies": ["T-001"],
+      "owned_paths": [
+        "coder_waifu/roles/__init__.py",
+        "coder_waifu/roles/loader.py",
+        "coder_waifu/roles/builtins/*.yaml"
+      ],
+      "inputs": [],
+      "outputs": ["role registry populated with 20 built-in roles"],
+      "acceptance_criteria": [
+        "roles/loader.py validates role YAML schema",
+        "builtins include 20 roles matching contract",
+        "user overrides merge correctly without mutating built-ins"
+      ],
+      "verification_commands": [
+        ".venv/bin/python -c 'from coder_waifu.roles.loader import load_roles; roles = load_roles(); assert len(roles) == 20'",
+        ".venv/bin/ruff check coder_waifu/roles/"
+      ],
+      "risk": "medium",
+      "status": "pending",
+      "attempts": 0,
+      "open_findings": []
+    },
+    {
+      "id": "T-004",
+      "title": "Discovery question engine with selectable options + freeform Other",
+      "objective": "Implement discovery/questions.py engine that accepts a question manifest, presents curated selectable options plus freeform Other, captures answers, and synthesizes reversible assumptions.",
+      "dependencies": ["T-001", "T-002"],
+      "owned_paths": [
+        "coder_waifu/discovery/__init__.py",
+        "coder_waifu/discovery/questions.py",
+        "tests/test_discovery.py"
+      ],
+      "inputs": [],
+      "outputs": ["question engine passing unit tests"],
+      "acceptance_criteria": [
+        "Every question surfaces selectable options plus Other",
+        "Freeform answer always accepted even when options are shown",
+        "Output includes both chosen option and freeform text"
+      ],
+      "verification_commands": [
+        ".venv/bin/python -m pytest tests/test_discovery.py -q",
+        ".venv/bin/ruff check coder_waifu/discovery/"
+      ],
+      "risk": "low",
+      "status": "pending",
+      "attempts": 0,
+      "open_findings": []
+    },
+    {
+      "id": "T-005",
+      "title": "Contract synthesis and persistence",
+      "objective": "Implement discovery/contract_synth.py that takes discovery answers, lightweight research findings, and reversible assumptions, then writes the draft contract to .agent/contract.json for user approval.",
+      "dependencies": ["T-002", "T-003", "T-004"],
+      "owned_paths": [
+        "coder_waifu/discovery/contract_synth.py",
+        "tests/test_contract_synth.py"
+      ],
+      "inputs": ["discovery questions answers", "built-in role registry"],
+      "outputs": [".agent/contract.json persisted draft"],
+      "acceptance_criteria": [
+        "contract_synth produces valid JSON contract",
+        "contract.json contains objective, deliverables, constraints, discovery_phase section",
+        "Manually verified change when rerunning discovery overwrites with versioned revision"
+      ],
+      "verification_commands": [
+        ".venv/bin/python -m pytest tests/test_contract_synth.py -q",
+        ".venv/bin/ruff check coder_waifu/discovery/"
+      ],
+      "risk": "medium",
+      "status": "pending",
+      "attempts": 0,
+      "open_findings": []
+    },
+    {
+      "id": "T-006",
+      "title": "Orchestration spawner for adversarial agent pairs",
+      "objective": "Implement orchestrate/spawner.py that accepts approved contract, selects roles, and dispatches 2 Hermes subagents per role via delegate_task batch mode with goal+context pairs. Collect summaries and write unified state.",
+      "dependencies": ["T-001", "T-002", "T-003", "T-005"],
+      "owned_paths": [
+        "coder_waifu/orchestrate/__init__.py",
+        "coder_waifu/orchestrate/spawner.py",
+        "tests/test_orchestrate.py"
+      ],
+      "inputs": ["approved .agent/contract.json", "role registry"],
+      "outputs": ["delegation calls issued", "subagent summaries captured"],
+      "acceptance_criteria": [
+        "Each selected role yields 2 delegate_task calls in a single batch",
+        "Individual failures do not abort unrelated roles",
+        "Failure modes are recorded into task.open_findings, not swallowed silently"
+      ],
+      "verification_commands": [
+        ".venv/bin/python -m pytest tests/test_orchestrate.py -q -k spawner",
+        ".venv/bin/ruff check coder_waifu/orchestrate/"
+      ],
+      "risk": "high",
+      "status": "pending",
+      "attempts": 0,
+      "open_findings": []
+    },
+    {
+      "id": "T-007",
+      "title": "Checkpoint store with resume logic",
+      "objective": "Implement checkpoint/store.py that writes JSON checkpoint files to .coder-waifu/checkpoints/, merges incremental state, and loads the latest valid checkpoint on resume.",
+      "dependencies": ["T-001", "T-002"],
+      "owned_paths": [
+        "coder_waifu/checkpoint/__init__.py",
+        "coder_waifu/checkpoint/store.py",
+        "tests/test_checkpoint.py"
+      ],
+      "inputs": [],
+      "outputs": ["checkpoint read/write/resume logic"],
+      "acceptance_criteria": [
+        "Writing one checkpoint and reading it back round-trips without data loss",
+        "Corrupt JSON file is detected and reported as BLOCKED with path to last valid checkpoint",
+        "Resume command restarts from the first pending task after verified ones"
+      ],
+      "verification_commands": [
+        ".venv/bin/python -m pytest tests/test_checkpoint.py -q",
+        ".venv/bin/ruff check coder_waifu/checkpoint/"
+      ],
+      "risk": "medium",
+      "status": "pending",
+      "attempts": 0,
+      "open_findings": []
+    },
+    {
+      "id": "T-008",
+      "title": "Scaffold command implementation",
+      "objective": "Implement coder-waifu init <name> creating target directory, .coder-waifu/variables/ directory, optional README.md, and a placeholder .agent/contract.json.",
+      "dependencies": ["T-001", "T-002"],
+      "owned_paths": [
+        "coder_waifu/scaffold/__init__.py",
+        "coder_waifu/scaffold/templates/*",
+        "tests/test_scaffold.py"
+      ],
+      "inputs": [],
+      "outputs": ["coder-waifu init creates expected file tree"],
+      "acceptance_criteria": [
+        "Scaffolded directory contains README.md, .coder-waifu/, .agent/",
+        "Re-running init on existing directory fails with explicit error",
+        "No files outside the target directory are created"
+      ],
+      "verification_commands": [
+        ".venv/bin/python -m pytest tests/test_scaffold.py -q",
+        ".venv/bin/ruff check coder_waifu/scaffold/"
+      ],
+      "risk": "low",
+      "status": "pending",
+      "attempts": 0,
+      "open_findings": []
+    },
+    {
+      "id": "T-009",
+      "title": "Unit tests for discovery, contract synthesis, CLI, and roles",
+      "objective": "Comprehensive unit tests covering question engine, selectable + freeform paths, role loader edge cases, CLI subcommands with mocked callbacks.",
+      "dependencies": ["T-002", "T-003", "T-004", "T-005", "T-008"],
+      "owned_paths": [
+        "tests/test_discovery.py",
+        "tests/test_contract_synth.py",
+        "tests/test_roles.py",
+        "tests/test_scaffold.py",
+        "tests/test_cli.py"
+      ],
+      "inputs": [],
+      "outputs": ["all unit tests passing"],
+      "acceptance_criteria": [
+        "pytest -q passes with zero failures",
+        "Coverage of question engine includes selectable-only and freeform-only paths"
+      ],
+      "verification_commands": [
+        ".venv/bin/python -m pytest tests/ -q --tb=short"
+      ],
+      "risk": "low",
+      "status": "pending",
+      "attempts": 0,
+      "open_findings": []
+    },
+    {
+      "id": "T-010",
+      "title": "Tests for spawner and checkpoint with mocks",
+      "objective": "Unit and integration-style tests using mocks for Hermes delegate_task to validate spawner tuple dispatch, partial failure handling, and checkpoint round-trip/resume.",
+      "dependencies": ["T-006", "T-007"],
+      "owned_paths": [
+        "tests/test_orchestrate.py",
+        "tests/test_checkpoint.py"
+      ],
+      "inputs": [],
+      "outputs": ["spawner and checkpoint tests passing"],
+      "acceptance_criteria": [
+        "Mock confirms delegate_task called with 2 tasks per role",
+        "Corrupt checkpoint triggers BLOCKED status with path exposure"
+      ],
+      "verification_commands": [
+        ".venv/bin/python -m pytest tests/test_orchestrate.py tests/test_checkpoint.py -q --tb=short"
+      ],
+      "risk": "medium",
+      "status": "pending",
+      "attempts": 0,
+      "open_findings": []
+    },
+    {
+      "id": "T-011",
+      "title": "E2E smoke test script",
+      "objective": "Create a hermetic shell script `scripts/smoke_test.sh` that installs the package in tmp venv, runs coder-waifu init, runs coder-waifu run --dry-run, and asserts expected artifacts.",
+      "dependencies": ["T-009", "T-010"],
+      "owned_paths": [
+        "scripts/smoke_test.sh"
+      ],
+      "inputs": [],
+      "outputs": ["smoke test passes in clean venv"],
+      "acceptance_criteria": [
+        "Script exits 0 on successful run",
+        "Script detects smoke failures and exits non-zero",
+        "Script is POSIX-safe"
+      ],
+      "verification_commands": [
+        "bash scripts/smoke_test.sh"
+      ],
+      "risk": "medium",
+      "status": "pending",
+      "attempts": 0,
+      "open_findings": []
+    },
+    {
+      "id": "T-012",
+      "title": "README.md, CONTRIBUTING.md, and architecture docs",
+      "objective": "Write user-facing README with install instructions, CLI usage examples, role overview, discovery-phase overview, and contribution guide. Ensure persona is absent from README.",
+      "dependencies": ["T-001"],
+      "owned_paths": [
+        "README.md",
+        "CONTRIBUTING.md",
+        "CHANGELOG.md"
+      ],
+      "inputs": [],
+      "outputs": ["documented project"],
+      "acceptance_criteria": [
+        "README contains install, usage, role overview, discovery overview",
+        "Examples are syntactically valid",
+        "README contains no Coder-Waifu persona decoration"
+      ],
+      "verification_commands": [
+        ".venv/bin/ruff check README.md CONTRIBUTING.md",
+        "python3 -c 'import re; text=open(\"README.md\").read(); assert re.search(r\"coder-waifu run\", text); assert \"Role\" in text'"
+      ],
+      "risk": "low",
+      "status": "pending",
+      "attempts": 0,
+      "open_findings": []
+    },
+    {
+      "id": "T-013",
+      "title": "Final verification gate: lint, format, type-check, tests, git audit",
+      "objective": "Run full verification suite: pytest -q, ruff check ., optional mypy/pyright if available, full git diff review, confirm clean state. Write .agent/last-verification.json and mark DONE or BLOCKED.",
+      "dependencies": ["T-009", "T-010", "T-011", "T-012"],
+      "owned_paths": [
+        ".agent/last-verification.json"
+      ],
+      "inputs": ["all prior task outputs"],
+      "outputs": ["last-verification.json", "DONE or BLOCKED verdict"],
+      "acceptance_criteria": [
+        "pytest -q passes with zero failures",
+        "ruff check . exits 0",
+        "Git status clean or only intended artifacts present",
+        "last-verification.json reflects actual pass/fail status"
+      ],
+      "verification_commands": [
+        ".venv/bin/python -m pytest -q --tb=short",
+        ".venv/bin/ruff check .",
+        "git status --porcelain",
+        "git diff --stat"
+      ],
+      "risk": "high",
+      "status": "pending",
+      "attempts": 0,
+      "open_findings": []
+    }
+  ],
+  "execution_rules": {
+    "no_concurrent_execution_when": [
+      "owned_paths overlap between tasks",
+      "one task depends on another",
+      "tasks modify shared schemas or migration files",
+      "tasks modify the same interface contract",
+      "tasks create incompatible environmental changes"
+    ],
+    "ready_queue": ["T-001"],
+    "blocked": [
+      "Subagent delegation require Hermes runtime with valid provider auth; in environments lacking this, T-006 must fall back to terminal-based Hermes invocation instead of delegate_task"
+    ]
+  }
+}

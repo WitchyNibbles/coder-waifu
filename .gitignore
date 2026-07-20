@@ -1,0 +1,16 @@
+__pycache__/
+*.pyc
+.venv/
+venv/
+dist/
+build/
+*.egg-info/
+.eggs/
+.coder-waifu/.cache/
+*.pyc
+.pytype/
+.mypy_cache/
+.ruff_cache/
+htmlcov/
+.coverage
+coverage.xml

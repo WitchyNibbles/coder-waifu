@@ -1,0 +1,86 @@
+{
+  "generated_at": "2026-07-21T01:12:00Z",
+  "researcher": "primary",
+  "claims": [
+    {
+      "id": "PRIM-1",
+      "claim": "Hermes exposes delegate_task as a first-class subagent-spawning primitive. It can be invoked from Python code in the same runtime as the active Hermes session via from hermes_tools import ... or equivalent in-session API.",
+      "source": "https://hermes-agent.nousresearch.com/docs/user-guide/features/delegation",
+      "source_type": "official_docs",
+      "retrieved_at": "2026-07-21",
+      "confidence": "high",
+      "limitations": ["The exact Python import path in a standalone installed package context is not fully enumerated in the extracts.", "delegate_task appears to be an in-session tool call, not necessarily available as a direct library function in all runtime contexts."],
+      "status": "supported"
+    },
+    {
+      "id": "PRIM-2",
+      "claim": "delegate_task supports parallel batch mode with configurable concurrency, synchronous orchestration child waiting for siblings, and background mode returning a handle without blocking.",
+      "source": "https://hermes-agent.nousresearch.com/docs/user-guide/features/delegation",
+      "source_type": "official_docs",
+      "retrieved_at": "2026-07-21",
+      "confidence": "high",
+      "limitations": [],
+      "status": "supported"
+    },
+    {
+      "id": "PRIM-3",
+      "claim": "Subagents start with completely fresh conversation context and only receive what the parent explicitly passes via goal and context fields.",
+      "source": "https://hermes-agent.nousresearch.com/docs/user-guide/features/delegation",
+      "source_type": "official_docs",
+      "retrieved_at": "2026-07-21",
+      "confidence": "high",
+      "limitations": [],
+      "status": "supported"
+    },
+    {
+      "id": "PRIM-4",
+      "claim": "subagent_start and subagent_stop plugin hooks exist, which could be used by a coder-waifu plugin to trigger checkpoint I/O around agent lifecycle events.",
+      "source": "https://hermes-agent.nousresearch.com/docs/user-guide/features/hooks",
+      "source_type": "official_docs",
+      "retrieved_at": "2026-07-21",
+      "confidence": "medium",
+      "limitations": ["Hooks are registered via plugin system; whether a pip-installed package can register plugin hooks without manual user configuration is unconfirmed.", "Two hook variants exist: Gateway and Plugin hooks; applicability to CLI sessions needs verification."],
+      "status": "inference"
+    },
+    {
+      "id": "PRIM-5",
+      "claim": "Hermes exposes AIAgent as an importable Python class from run_agent.py, usable as an embedded Python library outside the CLI.",
+      "source": "https://github.com/NousResearch/hermes-agent/blob/main/website/docs/guides/python-library.md",
+      "source_type": "official_docs",
+      "retrieved_at": "2026-07-21",
+      "confidence": "medium",
+      "limitations": ["The GitHub-blob page rendered with GitHub UI chrome rather than raw content in extraction, so the snippet has limited evidence.", "The exact install path and import stability of this class across versions is unconfirmed."],
+      "status": "supported_with_gaps"
+    },
+    {
+      "id": "PRIM-6",
+      "claim": "Hermes plugins can register custom tools via ~/.hermes/plugins/ with plugin.yaml + __init__.py, without modifying core code.",
+      "source": "https://github.com/NousResearch/hermes-agent/blob/main/website/docs/user-guide/features/plugins.md",
+      "source_type": "official_docs",
+      "retrieved_at": "2026-07-21",
+      "confidence": "medium",
+      "limitations": ["Plugin registration is user-local to ~/.hermes/plugins/; a pip package cannot silently register itself as a plugin without user action unless coder-waifu includes installer logic."],
+      "status": "supported_with_gaps"
+    },
+    {
+      "id": "PRIM-7",
+      "claim": "async_delegation toolset ships with Hermes v0.17.x, providing non-blocking background subagent delegation with task_id return values.",
+      "source": "https://www.marktechpost.com/2026/06/16/hermes-agent-adds-asynchronous-subagents-so-delegated-work-no-longer-blocks-the-parent-chat/",
+      "source_type": "third_party_news",
+      "retrieved_at": "2026-07-21",
+      "confidence": "medium",
+      "limitations": ["Third-party news source; not primary vendor documentation. Exact API shape of async_delegation in Python code is unconfirmed."],
+      "status": "inference"
+    },
+    {
+      "id": "PRIM-8",
+      "claim": "There is no documented public Python API for the Hermes /compact context-compaction slash command; plugins/hooks do not expose a published compaction hook in the extracted docs.",
+      "source": "https://hermes-agent.nousresearch.com/docs/user-guide/features/hooks + delegation docs",
+      "source_type": "official_docs",
+      "retrieved_at": "2026-07-21",
+      "confidence": "high",
+      "limitations": ["Mid-sections of hooks docs were truncated; full lifecycle hook list may exist but was not in the extracted head+tail."],
+      "status": "supported"
+    }
+  ]
+}

@@ -1,0 +1,295 @@
+{
+  "created_at": "2026-07-21T01:05:00Z",
+  "project": "coder-waifu",
+  "status": "approved",
+  "approved_at": "2026-07-21T01:10:00Z",
+  "user_approvals_recorded": [
+    {
+      "item": "A1_package_layout",
+      "choice": "package (coder_waifu/__init__.py)",
+      "approved_at": "2026-07-21T01:10:00Z"
+    },
+    {
+      "item": "A2_license",
+      "choice": "MIT",
+      "approved_at": "2026-07-21T01:10:00Z"
+    },
+    {
+      "item": "A3_scaffold_template",
+      "choice": "include coder-waifu init",
+      "approved_at": "2026-07-21T01:10:00Z"
+    }
+  ],
+  "revised_from": "2026-07-21T00:55:00Z",
+  "revision_reason": "User feedback: previous role list was too narrow; added discovery/intent phase; expanded role taxonomy",
+
+  "objective": "Build an open-source Python package and CLI tool named 'coder-waifu' that orchestrates an autonomous multi-agent engineering swarm inside Hermes. Before implementing any project task, coder-waifu enters a structured discovery phase in which it asks targeted clarifying questions and performs lightweight research to understand the user's actual intent. Only after that phase does it spawn role-based agent pairs to execute the work adversarially until production-grade standards are met. The system is context-aware, autonomously checkpoints before context compaction, and is resumable across sessions. Installable via pip for anyone using Hermes. The Coder-Waifu cute persona appears only in user-facing CLI output; all source code, artifacts, and documentation remain professional.",
+
+  "deliverables": [
+    "Python package 'coder-waifu' installable via pip",
+    "CLI entry point: 'coder-waifu' command (e.g., 'coder-waifu run <task>', 'coder-waifu init')",
+    "Agent orchestration engine leveraging Hermes delegate_task API for spawning role-based agent pairs",
+    "Built-in role definitions covering a full professional engineering organization; each role spawns 2 collaborating agents for adversarial review",
+    "Mandatory discovery/intent-extraction phase: clarifying questions + lightweight research before any implementation spawn",
+    "Autonomous context checkpointing and resumption mechanism",
+    "pytest test suite with passing tests covering orchestration logic, role loading, checkpoint behavior, and CLI entry points",
+    "ruff lint/format checks passing",
+    "README.md with install instructions, usage examples, role overview, contribution guide, and architecture summary",
+    ".agent/ workflow artifacts: plan.json, state.json, evidence.json, review.json, architecture.md, decisions.md, context-summary.md, last-verification.json, activity-log.jsonl"
+  ],
+
+  "deliverables_user_facing": [
+    "A CLI that asks clarifying questions naturally before doing irreversible or scoped work",
+    "A CLI that researches the user's project domain before assuming technology choices",
+    "A CLI that produces professional engineering artifacts, not trial-and-error prototypes"
+  ],
+
+  "constraints": [
+    "Python >= 3.10",
+    "Primary runtime dependency is Hermes Agent (delegate_task, subagent spawning). No custom orchestration runtime from scratch.",
+    "Minimal third-party runtime dependencies; prefer stdlib + Hermes built-ins. Only add deps with clear justification.",
+    "Discovery phase must execute before any implementation spawn: at least one round of clarifying questions or documented research should precede agent dispatch.",
+    "Context checkpointing must be autonomous and trigger before compaction, at task boundaries, and on explicit /compact signal.",
+    "Checkpoint state must survive session restart/resume.",
+    "All public APIs must have type hints.",
+    "Tests must run via: .venv/bin/python -m pytest -q",
+    "Lint/format check via: .venv/bin/ruff check .",
+    "License must be OSI-approved open source.",
+    "Code, commit messages, architecture documents, tests, and logs must be professional and persona-free.",
+    "Coder-Waifu cute persona appears only in direct user-facing CLI output, never in source code or artifacts.",
+    "Discovery questions MUST present selectable options first, with an explicit freeform Other option. Freeform must always remain available even when selectable options are presented."
+  ],
+
+  "built_in_roles": [
+    {
+      "id": "cto",
+      "title": "CTO / VP Engineering",
+      "focus": "Technical vision, architecture decisions, technology selection, trade-off analysis, feasibility, risk assessment",
+      "toolsets": ["web", "terminal", "file", "delegation"]
+    },
+    {
+      "id": "product_manager",
+      "title": "Product Manager",
+      "focus": "Requirements, user stories, acceptance criteria, scope definition, prioritization, stakeholder alignment",
+      "toolsets": ["terminal", "file"]
+    },
+    {
+      "id": "software_architect",
+      "title": "Software Architect",
+      "focus": "System design, interfaces, data flows, state ownership, failure modes, observability, testing strategy",
+      "toolsets": ["web", "terminal", "file", "delegation"]
+    },
+    {
+      "id": "backend_engineer",
+      "title": "Backend Engineer",
+      "focus": "API design, database schemas, business logic, authentication, performance, service contracts",
+      "toolsets": ["terminal", "file", "web", "code_execution"]
+    },
+    {
+      "id": "frontend_engineer",
+      "title": "Frontend Engineer",
+      "focus": "UI components, routing, state management, API integration, accessibility, browser compatibility",
+      "toolsets": ["terminal", "file", "web", "code_execution"]
+    },
+    {
+      "id": "frontend_designer",
+      "title": "Frontend Designer / UX Designer",
+      "focus": "Visual design, user flows, information architecture, prototypes, design systems, accessibility audits",
+      "toolsets": ["terminal", "file", "web", "vision", "image_gen"]
+    },
+    {
+      "id": "fullstack_engineer",
+      "title": "Full-Stack Engineer",
+      "focus": "End-to-end feature implementation, API + UI integration, cross-layer consistency, deployment",
+      "toolsets": ["terminal", "file", "web"]
+    },
+    {
+      "id": "devops_engineer",
+      "title": "DevOps / Platform Engineer",
+      "focus": "CI/CD, infrastructure as code, container orchestration, deployment pipelines, monitoring",
+      "toolsets": ["terminal", "file", "web"]
+    },
+    {
+      "id": "sre",
+      "title": "Site Reliability Engineer",
+      "focus": "Reliability, SLAs, error budgets, incident response, on-call runbooks, observability",
+      "toolsets": ["terminal", "file", "web"]
+    },
+    {
+      "id": "security_engineer",
+      "title": "Security Engineer",
+      "focus": "Threat modeling, penetration testing, dependency audits, secrets management, compliance",
+      "toolsets": ["terminal", "file", "web"]
+    },
+    {
+      "id": "qa_engineer",
+      "title": "QA / SDET",
+      "focus": "Test strategy, test automation, edge cases, regression suites, quality gates",
+      "toolsets": ["terminal", "file", "code_execution"]
+    },
+    {
+      "id": "data_engineer",
+      "title": "Data Engineer",
+      "focus": "Data pipelines, ETL, schema design, migration strategy, data quality, analytics infrastructure",
+      "toolsets": ["terminal", "file", "web", "code_execution"]
+    },
+    {
+      "id": "dba",
+      "title": "Database Administrator",
+      "focus": "Schema design, query optimization, replication, backup/restore, migration safety, indexing",
+      "toolsets": ["terminal", "file", "web"]
+    },
+    {
+      "id": "it_architect",
+      "title": "IT Architect",
+      "focus": "Network topology, identity management, directory services, on-prem integration, enterprise policies",
+      "toolsets": ["terminal", "file", "web"]
+    },
+    {
+      "id": "it_admin",
+      "title": "IT Administrator",
+      "focus": "System provisioning, access control, monitoring, patch management, incident triage",
+      "toolsets": ["terminal", "file"]
+    },
+    {
+      "id": "mobile_engineer",
+      "title": "Mobile Engineer (iOS/Android/Cross-Platform)",
+      "focus": "Mobile UI, platform APIs, app distribution, push notifications, offline behavior",
+      "toolsets": ["terminal", "file", "web"]
+    },
+    {
+      "id": "ml_engineer",
+      "title": "Machine Learning Engineer",
+      "focus": "Model training pipelines, inference serving, feature stores, experiment tracking, model evaluation",
+      "toolsets": ["terminal", "file", "web", "code_execution"]
+    },
+    {
+      "id": "technical_writer",
+      "title": "Technical Writer / Documentation Engineer",
+      "focus": "API docs, runbooks, architecture diagrams, CONTRIBUTING guides, user-facing documentation",
+      "toolsets": ["terminal", "file", "web"]
+    },
+    {
+      "id": "performance_engineer",
+      "title": "Performance Engineer",
+      "focus": "Load testing, profiling, latency optimization, memory/CPU analysis, benchmarking",
+      "toolsets": ["terminal", "file", "web", "code_execution"]
+    },
+    {
+      "id": "accessibility_specialist",
+      "title": "Accessibility Specialist",
+      "focus": "WCAG compliance, screen reader compatibility, keyboard navigation, color contrast, ARIA",
+      "toolsets": ["terminal", "file", "web"]
+    }
+  ],
+
+  "discovery_phase": {
+    "description": "Before spawning any role-based agents, coder-waifu must run a structured discovery phase to understand intent, assumptions, and constraints.",
+    "steps": [
+      "1. Parse the user's request and identify explicit deliverables, constraints, and non-goals.",
+      "2. Identify ambiguities that materially affect scope, technology, timeline, security, or acceptance criteria. Ask targeted clarifying questions (one at a time or in a small coherent group).",
+      "3. Perform lightweight domain research: technology/language/framework official docs, known best practices, common pitfalls in the problem domain. Prefer primary sources (official docs) within the last 6 months. Mark unverified claims as inference.",
+      "4. Synthesize research into a draft contract with explicit reversible assumptions where information is unavailable or provisional.",
+      "5. Present the draft contract to the user and wait for explicit approval before proceeding.",
+      "6. Record approved contract, assumptions, and evidence to .agent/."
+    ],
+    "blocking_questions_criteria": "Questions are blocking only when different answers materially change scope, architecture, security, cost, irreversible actions, or acceptance criteria.",
+    "reversible_assumptions_rule": "Non-blocking uncertainties must be recorded as explicit reversible assumptions, not asked as questions."
+  },
+
+  "non_goals": [
+    "No standalone orchestration runtime for non-Hermes environments",
+    "No web UI, dashboard, or GUI",
+    "No database or persistent backend service",
+    "No cloud deployment automation",
+    "No support for non-Hermes agent frameworks",
+    "No automatic PyPI publishing (manual release only)",
+    "No mandatory role is required for every run; coder-waifu selects applicable roles per task"
+  ],
+
+  "user_approvals_needed": [
+    "Package layout (flat module vs. package) — assumption A1",
+    "Open source license choice (MIT, Apache 2.0, etc.) — assumption A2",
+    "Whether to include a default project scaffold template (coder-waifu init) — assumption A3"
+  ],
+
+  "acceptance_criteria": [
+    "pip install coder-waifu succeeds in a clean venv",
+    "coder-waifu --help displays available commands, roles, and discovery-phase behavior",
+    "Running 'coder-waifu run <task>' enters a discovery phase with clarifying questions or documented research before spawning agents",
+    "Discovery phase produces a draft contract presented to the user for approval before implementation begins",
+    "Approved contract is persisted to .agent/contract.json and gates all subsequent agent spawns",
+    "Each selected role spawns exactly 2 collab/review agents via Hermes delegate_task",
+    "Context checkpointing triggers automatically before compaction and writes to .coder-waifu/checkpoints/",
+    "A paused/resumed session continues from the last checkpoint without losing task state",
+    "pytest -q passes with zero failures",
+    "ruff check . reports no errors",
+    "README.md contains install instructions, CLI usage, role descriptions, discovery-phase overview, and a usage example",
+    "All source code and artifacts are professional and persona-free; Coder-Waifu persona is confined to user-facing CLI output"
+  ],
+
+  "verification": [
+    "pip install -e . succeeds in clean venv",
+    ".venv/bin/python -m pytest -q --tb=short passes",
+    ".venv/bin/ruff check . exits 0",
+    "coder-waifu --help returns non-error exit code",
+    "coder-waifu run <trivial-task> produces a draft contract to .agent/contract.json and presents it to the user before spawning (manual observation)",
+    "Git status shows only intended files"
+  ],
+
+  "requires_user_approval": [],
+  "user_approvals_resolved": [
+    {"item": "A1_package_layout", "choice": "package (coder_waifu/__init__.py)", "approved_at": "2026-07-21T01:10:00Z"},
+    {"item": "A2_license", "choice": "MIT", "approved_at": "2026-07-21T01:10:00Z"},
+    {"item": "A3_scaffold_template", "choice": "include coder-waifu init", "approved_at": "2026-07-21T01:10:00Z"}
+  ],
+
+  "assumptions": {
+    "A1_package_layout": {
+      "chosen": "package (coder_waifu/__init__.py with supporting modules)",
+      "description": "Python package layout with package-level __init__.py. Supports future submodules: roles/, cli/, orchestration/, checkpointing/.",
+      "reversible": true,
+      "requires_user_approval": false,
+      "approved_at": "2026-07-21T01:10:00Z"
+    },
+    "A2_license": {
+      "chosen": "MIT",
+      "description": "OSI-approved MIT License. Reversible: can be changed to Apache 2.0 or another OSI-approved license before first release if requested.",
+      "reversible": true,
+      "requires_user_approval": false,
+      "approved_at": "2026-07-21T01:10:00Z"
+    },
+    "A3_scaffold_template": {
+      "chosen": "include 'coder-waifu init' scaffold command",
+      "description": "Provides 'coder-waifu init <project-name>' that scaffolds a starter project with .coder-waifu/, README, and optional config. Reversible: can be removed before v1 if scope grows too large.",
+      "reversible": true,
+      "requires_user_approval": false,
+      "approved_at": "2026-07-21T01:10:00Z"
+    },
+    "A4_hermes_api": {
+      "chosen": "delegate_task from hermes_tools",
+      "description": "Uses Hermes delegate_task API for all agent spawning. Assumes Hermes runtime provides this API in Python context.",
+      "reversible": false
+    },
+    "A5_checkpoint_location": {
+      "chosen": ".coder-waifu/checkpoints/ in the target project root",
+      "description": "Checkpoints stored as JSON files in the target project's .coder-waifu/ directory. Avoids conflicts with .agent/ used by the orchestrator itself.",
+      "reversible": true
+    },
+    "A6_role_definition_source": {
+      "chosen": "Bundled YAML files under coder_waifu/roles/ with user-extensible override support",
+      "description": "Each built-in role defined as a YAML file specifying system prompt, expertise areas, review criteria, and agent count (always 2). Users can add custom YAML roles in their .coder-waifu/roles/ to override or extend the built-ins.",
+      "reversible": true
+    },
+    "A7_context_trigger": {
+      "chosen": "Hermes context-compaction signal + task boundary + explicit /compact command",
+      "description": "Checkpoint triggers: (1) before context compaction, (2) at end of each agent task boundary, (3) on user-issued /compact. Assumes Hermes provides a compaction-trigger hook or signal. Fallback: keyword-based heuristics in coder-waifu if no direct hook is available.",
+      "reversible": false
+    },
+    "A8_discovery_depth": {
+      "chosen": "At least one round of clarifying questions or documented lightweight research before any implementation spawn",
+      "description": "The discovery phase must produce a draft contract with explicit assumptions. The CLI will present this draft and wait for user approval (or auto-approve when no blocking questions remain and the user has previously authorized 'coder-waifu continue without asking').",
+      "reversible": false
+    }
+  }
+}
