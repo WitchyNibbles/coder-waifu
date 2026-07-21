@@ -1,6 +1,15 @@
-![waifu-logo](docs/waifu-logo.png)
-
-# ✨ coder-waifu ✨
+<div align="center">
+  <img src="docs/waifu-logo.png" alt="coder-waifu waifu logo" width="180">
+  <br>
+  <pre>
+ ██████╗ ██╗ ██████╗ ███████╗██████╗  ██████╗ ████████╗██╗   ██╗███████╗
+██╔════╝██║██╔═══██╗██╔════╝██╔══██╗██╔════╝ ╚══██╔══╝██║   ██║██╔════╝
+██║     ██║██║   ██║███████╗██████╔╝██║         ██║   ██║   ██║█████╗  
+██║     ██║██║   ██║╚════██║██╔══██╗██║         ██║   ██║   ██║██╔══╝  
+███████╗██║╚██████╔╝███████║██║  ██║╚██████╗    ██║   ╚██████╔╝███████╗
+╚══════╝╚═╝ ╚═════╝ ╚══════╝╚═╝  ╚═╝ ╚═════╝     ╚═╝    ╚═════╝ ╚══════╝
+  </pre>
+</div>
 
 > *Autonomous engineering orchestrator for Hermes Agent — now with 20 built-in role pairs and mandatory discovery/intent validation before any work spawns.*
 
@@ -100,11 +109,13 @@ Long runs? No problem. `coder-waifu` checkpoints state at task boundaries and be
 
 ## ?? Mascot / Logo
 
-The waifu logo is a chibi engineer mascot inspired by Arcane/Wild Rift Jinx aesthetics — choppy asymmetric hair, hextech goggles, neon magenta accents, and a keyboard-fragment core. Because great software deserves a great mascot, nya~ ♡
+Sixteen-oh-six waifu, encircled by a hextech frame. Chopped blue bangs, one bright magenta streak, goggles framing the face, holding the team hostage with a keyboard-fragment device. It’s the engineer mode you shouldn’t activate, but absolutely would.
 
-![waifu-logo](docs/waifu-logo.png)
+Design references: Arcane/Wild Rift palette — electric blues, neon magentas, hextech glow.
 
-*Design references: Arcane color palettes — electric blues, neon magentas, and hextech glow tones.*
+<div align="center">
+  <img src="docs/waifu-logo.png" alt="coder-waifu waifu logo" width="160">
+</div>
 
 ## License
 
