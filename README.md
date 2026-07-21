@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="docs/waifu-logo.png" alt="coder-waifu waifu logo" width="160">
+  <img src="docs/waifu-logo-jinx.png" alt="coder-waifu waifu logo" width="160">
   <br>
   <pre>
 ██╗  ██╗ ██████╗ ██╗   ██╗████████╗███████╗
@@ -112,7 +112,7 @@ Long runs? No problem. `coder-waifu` checkpoints state at task boundaries and be
 A circular waifu badge with a chibi Arcane-style face in the middle: choppy blue hair, bright magenta streak, hextech goggles, framed by soft sakura petals. It’s the cute engineer mode you shouldn’t activate, but absolutely would.
 
 <div align="center">
-  <img src="docs/waifu-logo.png" alt="coder-waifu waifu logo" width="160">
+  <img src="docs/waifu-logo-jinx.png" alt="coder-waifu waifu logo" width="160">
 </div>
 
 Design references: Arcane/Wild Rift palette — electric blues, neon magentas, hextech glow, and sakura accents.
