@@ -1,13 +1,13 @@
 <div align="center">
-  <img src="docs/waifu-logo.png" alt="coder-waifu waifu logo" width="180">
+  <img src="docs/waifu-logo.png" alt="coder-waifu waifu logo" width="160">
   <br>
   <pre>
- ██████╗ ██╗ ██████╗ ███████╗██████╗  ██████╗ ████████╗██╗   ██╗███████╗
-██╔════╝██║██╔═══██╗██╔════╝██╔══██╗██╔════╝ ╚══██╔══╝██║   ██║██╔════╝
-██║     ██║██║   ██║███████╗██████╔╝██║         ██║   ██║   ██║█████╗  
-██║     ██║██║   ██║╚════██║██╔══██╗██║         ██║   ██║   ██║██╔══╝  
-███████╗██║╚██████╔╝███████║██║  ██║╚██████╗    ██║   ╚██████╔╝███████╗
-╚══════╝╚═╝ ╚═════╝ ╚══════╝╚═╝  ╚═╝ ╚═════╝     ╚═╝    ╚═════╝ ╚══════╝
+██╗  ██╗ ██████╗ ██╗   ██╗████████╗███████╗
+██║  ██║██╔═══██╗██║   ██║╚══██╔══╝██╔════╝
+███████║██║   ██║██║   ██║   ██║   ███████╗
+██╔══██║██║   ██║██║   ██║   ██║   ╚════██║
+██║  ██║╚██████╔╝╚██████╔╝   ██║   ███████║
+╚═╝  ╚═╝ ╚═════╝  ╚═════╝    ╚═╝   ╚══════╝
   </pre>
 </div>
 
@@ -109,13 +109,13 @@ Long runs? No problem. `coder-waifu` checkpoints state at task boundaries and be
 
 ## ?? Mascot / Logo
 
-Sixteen-oh-six waifu, encircled by a hextech frame. Chopped blue bangs, one bright magenta streak, goggles framing the face, holding the team hostage with a keyboard-fragment device. It’s the engineer mode you shouldn’t activate, but absolutely would.
-
-Design references: Arcane/Wild Rift palette — electric blues, neon magentas, hextech glow.
+A circular waifu badge with a chibi Arcane-style face in the middle: choppy blue hair, bright magenta streak, hextech goggles, framed by soft sakura petals. It’s the cute engineer mode you shouldn’t activate, but absolutely would.
 
 <div align="center">
   <img src="docs/waifu-logo.png" alt="coder-waifu waifu logo" width="160">
 </div>
+
+Design references: Arcane/Wild Rift palette — electric blues, neon magentas, hextech glow, and sakura accents.
 
 ## License
 
